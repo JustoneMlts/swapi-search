@@ -6,6 +6,8 @@ const searchSWAPI = async (query: string, type: string | undefined) => {
   const categories = ['people', 'planets', 'films', 'species', 'starships', 'vehicles'];
   const results: { [key: string]: any[] } = {};
 
+  console.log(query)
+
   try {
     if (type && categories.includes(type)) {
       const response = await axios.get(`${url}${type}/?search=${query}`);
