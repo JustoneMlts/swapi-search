@@ -1,0 +1,156 @@
+.loginPage {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    background: rgb(8,21,38);
+    background: linear-gradient(131deg, rgba(8,21,38,1) 0%, rgba(33,63,89,1) 97%); 
+  }
+  
+  .backgroundImage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* background-image: url("/placeholder.svg?height=1080&width=1920");
+    background-size: cover;
+    background-position: center; */
+    z-index: -1;
+  }
+  
+  .loginContainer {
+    background-color: var(--color-primary);
+    border-radius: 10px;
+    overflow: hidden;
+    width: 100%;
+    max-width: 400px;
+    margin: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .imageContainer {
+    display: none;
+  }
+  
+  .formContainer {
+    padding: 40px;
+  }
+  
+  .title {
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .inputGroup {
+    margin-bottom: 20px;
+  }
+ 
+
+  
+  .inputGroup input {
+    width: 100%;
+    padding: 14px;
+    color: var(--color-text);
+    background-color: var(--color-secondary);
+    border: 1px solid var(--color-secondary);
+    border-radius: 10px;
+    font-size: 16px;
+  }
+  
+  .passwordInput {
+    position: relative;
+  }
+  
+  .showPasswordButton {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #666;
+  }
+
+  .forgotPassword {
+    text-align: right;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    font-size: 14px;
+    margin-bottom: 20px;
+    color: var(--color-text);
+    text-decoration: none;
+    width: 100%;
+  }
+
+  .forgotPasswordText {
+    text-align: right;
+    display: block;
+    font-size: 14px;
+    margin-bottom: 20px;
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .forgotPasswordText:hover {
+    color: var(--color-secondary);
+   }
+ 
+
+  .loginButton {
+    background-color: var(--color-secondary);
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .loginButton:hover {
+    background-color: var(--color-background);
+  }
+  
+  @media (min-width: 768px) {
+    .backgroundImage {
+      display: none;
+    }
+  
+    .loginContainer {
+      display: flex;
+      max-width: 60%;
+      background-color: var(--color-primary);
+    }
+  
+    .imageContainer {
+      display: block;
+      width: 50%;
+    }
+
+    .image {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;   
+    }
+  
+    .formContainer {
+      width: 50%;
+      padding: 60px;
+    }
+  }
+  
+  
