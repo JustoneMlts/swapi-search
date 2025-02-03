@@ -22,13 +22,11 @@ export const Home = () => {
   
     try {
       const response = await searchApi(query, category);
-      console.log("API Response:", response);
   
       const extractedResults: SearchResult[] = Object.values(response)
         .filter(Array.isArray)
         .flat();
   
-      console.log("Extracted Results:", extractedResults);
       setResults(extractedResults);
       setSelectedResult(null);
   
@@ -48,10 +46,6 @@ export const Home = () => {
   const toggleViewMode = () => {
     setViewMode(viewMode === "list" ? "table" : "list")
   }
-
-  useEffect(() => {
-    console.log("results : ", results)
-  }, [results])
 
   return (
     <div className={styles.app}>

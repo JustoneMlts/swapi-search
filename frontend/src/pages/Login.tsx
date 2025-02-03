@@ -18,8 +18,6 @@ export const Login = ({
     console.log("Login attempted with:", { username, password })
   }
 
-  console.log("test")
-
   return (
     <div className={styles.loginPage}>
       <div className={styles.loginContainer}>

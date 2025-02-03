@@ -5,7 +5,6 @@ import { MdOutlineQuestionMark } from "react-icons/md";
 import styles from "../components/ResultsList.module.css"
 
 export const renderIcon = (type: string) => {
-    console.log("type : ", type)
     switch (type) {
         case "Character":
             return <FaUser className={styles.icon} size={18} />
