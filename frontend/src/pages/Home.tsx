@@ -4,7 +4,7 @@ import { ResultsList } from "../components/ResultsList"
 import { ResultsTable } from "../components/ResultsTable"
 import { DetailCard } from "../components/DetailCard"
 import type { SearchResult, SearchCategory } from "../types/types"
-import { List, Table } from "lucide-react"
+import { Spinner } from '../components/Spinner';
 import { searchApi } from "../controllers/searchController"
 import styles from "./Home.module.css"
 import { getNameByType } from "../helpers/typeHelper"
@@ -42,7 +42,6 @@ export const Home = () => {
     }
   };
  
-
   const toggleViewMode = () => {
     setViewMode(viewMode === "list" ? "table" : "list")
   }
@@ -64,7 +63,7 @@ export const Home = () => {
         )} */}
         <div className={styles.content}>
           {isLoading ? (
-            <p>Loading...</p>
+            <Spinner />
           ) : error ? (
             <p className={styles.error}>{error}</p>
           ) : results ? (
