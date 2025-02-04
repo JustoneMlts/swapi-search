@@ -1,0 +1,50 @@
+.modernButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    background-color: var(--color-primary);
+    color: var(--color-text);
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 200px;
+    margin-bottom: 4px;
+  }
+  
+  .modernButton:hover {
+    background-color: var(--color-primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .modernButton:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .buttonText {
+    margin-right: 8px;
+  }
+  
+  .buttonIcon {
+    transition: transform 0.3s ease;
+  }
+  
+  .modernButton:hover .buttonIcon {
+    transform: translateX(4px);
+  }
+  
+  @media (max-width: 768px) {
+    .modernButton {
+      font-size: 12px;
+      padding: 8px 16px;
+    }
+  }
+  
+  

@@ -32,3 +32,6 @@ input:-webkit-autofill:active{
     background-color: var(--color-secondary);
 }
 
+ul {
+  list-style-type: none;
+}

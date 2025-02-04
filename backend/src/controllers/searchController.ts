@@ -37,5 +37,6 @@ export const searchDataController = {
     } catch (error: any) {
       return h.response({ error: error.message }).code(500);  
     }
-  }
+  },
+  
 };
