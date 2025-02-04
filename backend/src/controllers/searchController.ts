@@ -2,7 +2,6 @@ import axios from 'axios';
 
 const searchSWAPI = async (query: string, type: string | undefined) => {
   const url = `https://swapi.dev/api/`;
-
   const categories = ['people', 'planets', 'films', 'species', 'starships', 'vehicles'];
   const results: { [key: string]: any[] } = {};
   try {
