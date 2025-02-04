@@ -21,7 +21,6 @@ const searchSWAPI = async (query: string, type: string | undefined) => {
 
     return results;
   } catch (error) {
-    console.error('Erreur de recherche SWAPI:', error);
     throw new Error('Erreur lors de la récupération des données de SWAPI');
   }
 };

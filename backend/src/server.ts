@@ -1,9 +1,26 @@
 import Hapi from '@hapi/hapi';
 import { searchDataController } from './controllers/searchController';
 
+console.log("ici")
+
 const server = Hapi.server({
-  port: 3000,
+  port: 5000,
   host: 'localhost',
+  routes: {
+    cors: {
+      origin: ["*"], 
+      headers: ["Accept", "Content-Type", "Authorization"],
+      additionalHeaders: ["X-Requested-With"],
+    },
+  },
+});
+
+server.route({
+  method: 'GET',
+  path: '/',
+  handler: (request, h) => {
+    return 'Hello, world!';
+  }
 });
 
 server.route({
