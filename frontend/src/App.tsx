@@ -5,7 +5,7 @@ import Home from "./pages/Home";
 import DetailPage from "./pages/DetailPage";
 
 export const App = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const handleLogin = () => {
     setIsAuthenticated(true);

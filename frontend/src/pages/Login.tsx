@@ -3,6 +3,7 @@ import { useState } from "react"
 import { Eye, EyeOff } from "lucide-react"
 import  Rebel  from "../assets/rebel.svg"
 import styles from "./Login.module.css"
+import { authController } from "../controllers/authController"
 
 export const Login = ({
   handleLogin
@@ -12,10 +13,16 @@ export const Login = ({
   const [showPassword, setShowPassword] = useState(false)
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log("Login attempted with:", { username, password })
+    try {
+      await authController.login(username, password);
+        handleLogin()
+    } catch {
+        setError("Incorrect vos identifiants sont");
+    }
   }
 
   return (
@@ -56,11 +63,12 @@ export const Login = ({
                 </button>
               </div>
             </div>
-            <a href="#" className={styles.forgotPassword}>
-              <span className={styles.forgotPasswordText}>
-                Forgot password?
-              </span>
-            </a>
+            <div>
+              {error && 
+              <span className={styles.error}>
+                {error}
+              </span>}
+            </div>
             <button type="submit" className={styles.loginButton}>
               Login
             </button>

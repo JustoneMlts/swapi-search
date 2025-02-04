@@ -1,5 +1,6 @@
 import Hapi from '@hapi/hapi';
 import { searchDataController } from './controllers/searchController';
+import { authController } from './controllers/authController'
 
 console.log("ici")
 
@@ -28,6 +29,18 @@ server.route({
   path: '/search',
   handler: searchDataController.search,  
 });
+
+server.route({
+  method: "GET",
+  path: "/protected",
+  handler: authController.validateToken,
+});
+
+server.route({
+  method: "POST",
+  path: "/login",
+  handler: authController.login
+})
 
 const start = async () => {
   try {
