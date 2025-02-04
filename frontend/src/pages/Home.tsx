@@ -66,7 +66,7 @@ export const Home = () => {
             <Spinner />
           ) : error ? (
             <p className={styles.error}>{error}</p>
-          ) : results ? (
+          ) : results && results.length ? (
             <>
               {viewMode === "list" ? (
                 <ResultsList results={results} onSelectResult={setSelectedResult} />
