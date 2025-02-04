@@ -8,28 +8,36 @@ import { Spinner } from '../components/Spinner';
 import { searchApi } from "../controllers/searchController"
 import styles from "./Home.module.css"
 import { getNameByType } from "../helpers/typeHelper"
+import { ModernButton } from "../components/ModernButton"
+import { useNavigate } from "react-router-dom"
+import { authController } from "../controllers/authController"
 
-export const Home = () => {
+export const Home = ({
+  handleLogout
+}: {
+  handleLogout: () => void;
+}) => {
   const [results, setResults] = useState<SearchResult[]>([])
   const [selectedResult, setSelectedResult] = useState<SearchResult | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [viewMode, setViewMode] = useState<"list" | "table">("list")
+  const navigate = useNavigate();
 
   const handleSearch = async (query: string, category: SearchCategory): Promise<string[]> => {
     setIsLoading(true);
     setError(null);
-  
+
     try {
       const response = await searchApi(query, category);
-  
+
       const extractedResults: SearchResult[] = Object.values(response)
         .filter(Array.isArray)
         .flat();
-  
+
       setResults(extractedResults);
       setSelectedResult(null);
-  
+
       return extractedResults.map((item) => {
         return getNameByType(item)
       });
@@ -41,26 +49,23 @@ export const Home = () => {
       setIsLoading(false);
     }
   };
- 
-  const toggleViewMode = () => {
-    setViewMode(viewMode === "list" ? "table" : "list")
-  }
 
   return (
     <div className={styles.app}>
+       <div className={styles.logout}>
+          <ModernButton onClick={() => {
+            authController.logout();
+            handleLogout();
+            navigate('/')
+          }}>
+            Logout
+          </ModernButton>
+        </div>
       <h1 className={styles.title}>Star Wars Explorer</h1>
       <div className={styles.container}>
         <div className={styles.searchBarContainer}>
-          <SearchBar onSearch={handleSearch} setResults={setResults}/>
+          <SearchBar onSearch={handleSearch} setResults={setResults} />
         </div>
-        {/* {results && (
-          <div className={styles.viewToggle}>
-            <button onClick={toggleViewMode} className={styles.viewToggleButton}>
-              {viewMode === "list" ? <Table size={20} /> : <List size={20} />}
-              {viewMode === "list" ? "Table View" : "List View"}
-            </button>
-          </div>
-        )} */}
         <div className={styles.content}>
           {isLoading ? (
             <Spinner />
