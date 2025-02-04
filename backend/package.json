@@ -16,9 +16,11 @@
     "axios": "^1.7.9",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
-    "hapi": "^18.1.0"
+    "hapi": "^18.1.0",
+    "jsonwebtoken": "^9.0.2"
   },
   "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.8",
     "@types/node": "^22.12.0",
     "nodemon": "^3.1.9",
     "ts-node": "^10.9.2",

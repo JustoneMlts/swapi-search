@@ -53,9 +53,7 @@
   .inputGroup {
     margin-bottom: 20px;
   }
- 
-
-  
+   
   .inputGroup input {
     width: 100%;
     padding: 14px;
@@ -84,33 +82,22 @@
     color: #666;
   }
 
-  .forgotPassword {
+  .error {
     text-align: right;
     display: flex;
     justify-content: end;
     align-items: center;
-    font-size: 14px;
+    font-size: 12px;
     margin-bottom: 20px;
-    color: var(--color-text);
+    color: red;
     text-decoration: none;
     width: 100%;
   }
 
-  .forgotPasswordText {
-    text-align: right;
-    display: block;
-    font-size: 14px;
-    margin-bottom: 20px;
-    color: var(--color-text);
-    text-decoration: none;
-  }
-
-  .forgotPasswordText:hover {
-    color: var(--color-secondary);
-   }
- 
-
   .loginButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: var(--color-secondary);
     color: white;
     border: none;
