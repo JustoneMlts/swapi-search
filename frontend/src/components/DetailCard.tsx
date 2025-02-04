@@ -10,16 +10,14 @@ interface DetailCardProps {
   result: SearchResult | null
 }
 
-const extractPathFromUrl = (url: string): string | null => {
-  try {
+const extractPathFromUrl = (url: string): string => {
     const parts = new URL(url).pathname.split("/").filter(Boolean);
     if (parts.length >= 2) {
       return `/${parts[parts.length - 2]}/${parts[parts.length - 1]}`;
     }
-  } catch (e) {
-    return null;
-  }
-  return null;
+    else {
+      return url
+    }
 };
 
 const isSwapiUrl = (value: string): boolean => {
@@ -43,49 +41,57 @@ const RenderDetails: React.FC<{ result: Record<string, any> }> = ({ result }) =>
           value !== undefined &&
           (!Array.isArray(value) || value.length > 0)
         )
-        .map(([key, value]) => (
-          <div key={key}>
-            {Array.isArray(value) ? (
-              <div className={styles.cardText}>
-                <button
-                  onClick={() => toggleExpand(key)}
-                  className={styles.cardText}
-                >
-                  {expandedFields[key] ? "🔽" : "▶️"} <strong>{formatKey(key)}</strong> ({value.length})
-                </button>
-                {expandedFields[key] && (
-                  <ul>
-                    {value.map((item, index) => {
-                      const urlPath = typeof item === "string" && isSwapiUrl(item) ? extractPathFromUrl(item) : null;
-                      return (
-                        <li key={index}>
-                          {urlPath ? (
-                            <ModernButton onClick={() => navigate(urlPath)}>
-                              {urlPath}
-                            </ModernButton>
-                          ) : (
-                            typeof item === "object" ? JSON.stringify(item, null, 2) : item
-                          )}
-                        </li>
-                      );
-                    })}
-                  </ul>
-                )}
-              </div>
-            ) : (
-              <p>
-                <strong>{formatKey(key)}:</strong> &nbsp;
-                {typeof value === "string" && isSwapiUrl(value) ? (
-                  <ModernButton onClick={() => navigate(value)}>
-                    {value}
-                  </ModernButton>
-                ) : (
-                  value
-                )}
-              </p>
-            )}
-          </div>
-        ))}
+        .map(([key, value]) => {
+          return (
+            <div key={key}>
+              {Array.isArray(value) ? (
+                <>
+                  <div className={styles.cardText}>
+                    <button
+                      onClick={() => toggleExpand(key)}
+                      className={styles.cardText}
+                    >
+                      {expandedFields[key] ? "🔽" : "▶️"} <strong>{formatKey(key)}</strong> ({value.length})
+                    </button>
+                    {expandedFields[key] && (
+                      <ul>
+                        {value.map((item, index) => {
+                          const urlPath = typeof item === "string" && isSwapiUrl(item) ? extractPathFromUrl(item) : null;
+                          return (
+                            <li key={index}>
+                              {urlPath ? (
+                                <ModernButton onClick={() => navigate(urlPath)}>
+                                  {urlPath}
+                                </ModernButton>
+                              ) : (
+                                typeof item === "object" ? JSON.stringify(item, null, 2) : item
+                              )}
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    )}
+                  </div>
+                </>
+              ) : (
+                <p>
+                  <strong>{formatKey(key)}:</strong> &nbsp;
+                  {typeof value === "string" && isSwapiUrl(value) ? (
+                    <ModernButton onClick={() => {
+                      if (extractPathFromUrl(value) !== null) {
+                        navigate(extractPathFromUrl(value))
+                      }
+                    }}>
+                      {extractPathFromUrl(value)}
+                    </ModernButton>
+                  ) : (
+                    value
+                  )}
+                </p>
+              )}
+            </div>
+          )
+        })}
     </div>
   );
 };

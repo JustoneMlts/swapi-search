@@ -61,6 +61,10 @@
   text-align: center;
 }
 
+.logout {
+  top: 0;
+}
+
 @media (min-width: 768px) {
   .content {
     flex-direction: row;
