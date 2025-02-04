@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5000";
+require('dotenv').config()
+
+const API_URL = process.env.REACT_APP_BASE_URL;
 
 export const authController = {
   login: async (username: string, password: string): Promise<{ message: string; token: string }> => {
