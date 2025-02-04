@@ -13,25 +13,50 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const hapi_1 = __importDefault(require("@hapi/hapi"));
-const dotenv_1 = __importDefault(require("dotenv"));
-dotenv_1.default.config();
-const init = () => __awaiter(void 0, void 0, void 0, function* () {
-    const server = hapi_1.default.server({
-        port: process.env.PORT || 3000, 
-        host: "localhost"
-    });
-    server.route({
-        method: "GET",
-        path: "/api",
-        handler: (request, h) => {
-            return h.response({ message: "Server is running 🚀" }).code(200);
-        }
-    });
-    yield server.start();
-    console.log(`🚀 Server running on ${server.info.uri}`);
+const searchController_1 = require("./controllers/searchController");
+const authController_1 = require("./controllers/authController");
+console.log("ici");
+const server = hapi_1.default.server({
+    port: 5000,
+    host: 'localhost',
+    routes: {
+        cors: {
+            origin: ["*"],
+            headers: ["Accept", "Content-Type", "Authorization"],
+            additionalHeaders: ["X-Requested-With"],
+        },
+    },
 });
-process.on("unhandledRejection", (err) => {
-    console.error("Unhandled error:", err);
-    process.exit(1);
+server.route({
+    method: 'GET',
+    path: '/',
+    handler: (request, h) => {
+        return 'Hello, world!';
+    }
 });
-init();
+server.route({
+    method: 'GET',
+    path: '/search',
+    handler: searchController_1.searchDataController.search,
+});
+server.route({
+    method: "GET",
+    path: "/protected",
+    handler: authController_1.authController.validateToken,
+});
+server.route({
+    method: "POST",
+    path: "/login",
+    handler: authController_1.authController.login
+});
+const start = () => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        yield server.start();
+        console.log('Server running on %s', server.info.uri);
+    }
+    catch (err) {
+        console.log(err);
+        process.exit(1);
+    }
+});
+start();
