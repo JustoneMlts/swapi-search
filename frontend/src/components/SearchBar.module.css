@@ -37,23 +37,29 @@
     display: flex;
     align-items: center;
     flex-grow: 1;
+    cursor: pointer;
+
   }
   
   .select {
     width: 100%;
-    padding: 12px 40px 12px 16px;
+    padding: 12px 0px 12px 16px;
     font-size: 16px;
     border: none;
     background-color: transparent;
     appearance: none;
     cursor: pointer;
-    color: var(--color-secondary)
+    color: var(--color-secondary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   
   .selectIcon {
-    position: absolute;
-    right: 12px;
-    pointer-events: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
     color: var(--color-secondary)
   }
   
