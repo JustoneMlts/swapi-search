@@ -19,7 +19,7 @@
   }
   
   .searchInput {
-    width: 100%;
+    width: 30%;
     padding: 12px 16px;
     font-size: 16px;
     border: none;
@@ -47,6 +47,7 @@
     background-color: transparent;
     appearance: none;
     cursor: pointer;
+    color: var(--color-secondary)
   }
   
   .selectIcon {

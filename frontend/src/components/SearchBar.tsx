@@ -54,8 +54,12 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSearch, setResults }) =>
               className={styles.select}
             >
               <option value="all">All</option>
-              <option value="character">Characters</option>
-              <option value="planet">Planets</option>
+              <option value="people">Characters</option>
+              <option value="planets">Planets</option>
+              <option value="films">Films</option>
+              <option value="starships">Starships</option>
+              <option value="species">Species</option>
+              <option value="vehicles">Vehicles</option>
             </select>
             <ChevronDown size={20} className={styles.selectIcon} />
           </div>
