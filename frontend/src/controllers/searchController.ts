@@ -8,7 +8,6 @@ export const searchApi = async (query: string, type?: string) => {
         type: type,
       },
     });
-    let resArray = []
     return response.data; 
   } catch (error) {
     console.error('Erreur lors de la recherche :', error);
