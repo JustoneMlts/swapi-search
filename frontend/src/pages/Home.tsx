@@ -11,18 +11,22 @@ import { getNameByType } from "../helpers/typeHelper"
 import { ModernButton } from "../components/ModernButton"
 import { useNavigate } from "react-router-dom"
 import { authController } from "../controllers/authController"
+import { useDispatch, useSelector } from "react-redux";
+import { setSearchResults, clearSearchResults, selectSearchResults } from "../redux/slices/searchSlice"; 
+import { RootState } from "../redux/store"
 
 export const Home = ({
   handleLogout
 }: {
   handleLogout: () => void;
 }) => {
-  const [results, setResults] = useState<SearchResult[]>([])
+  const searchResults = useSelector(selectSearchResults);
   const [selectedResult, setSelectedResult] = useState<SearchResult | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [viewMode, setViewMode] = useState<"list" | "table">("list")
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSearch = async (query: string, category: SearchCategory): Promise<string[]> => {
     setIsLoading(true);
@@ -34,8 +38,7 @@ export const Home = ({
       const extractedResults: SearchResult[] = Object.values(response)
         .filter(Array.isArray)
         .flat();
-
-      setResults(extractedResults);
+      dispatch(setSearchResults(extractedResults));
       setSelectedResult(null);
 
       return extractedResults.map((item) => {
@@ -43,12 +46,16 @@ export const Home = ({
       });
     } catch (err) {
       setError("An error occurred while searching. Please try again.");
-      setResults([]);
+      dispatch(setSearchResults([]));
       return [];
     } finally {
       setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    console.log("searchResults",searchResults)
+  }, [searchResults])
 
   return (
     <div className={styles.app}>
@@ -64,24 +71,24 @@ export const Home = ({
       <h1 className={styles.title}>Star Wars Explorer</h1>
       <div className={styles.container}>
         <div className={styles.searchBarContainer}>
-          <SearchBar onSearch={handleSearch} setResults={setResults} />
+          <SearchBar onSearch={handleSearch}  />
         </div>
         <div className={styles.content}>
           {isLoading ? (
             <Spinner />
           ) : error ? (
             <p className={styles.error}>{error}</p>
-          ) : results && results.length ? (
+          ) : searchResults && searchResults.length ? (
             <>
               {viewMode === "list" ? (
-                <ResultsList results={results} onSelectResult={setSelectedResult} />
+                <ResultsList results={searchResults} onSelectResult={setSelectedResult} />
               ) : (
-                <ResultsTable results={results} onSelectResult={setSelectedResult} />
+                <ResultsTable results={searchResults} onSelectResult={setSelectedResult} />
               )}
               <DetailCard result={selectedResult} />
             </>
           ) : (
-            <p>No results found. Try a different search.</p>
+            <p>No searchResults found. Try a different search.</p>
           )}
         </div>
       </div>
