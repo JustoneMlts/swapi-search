@@ -6,24 +6,11 @@ import { IoMdPlanet } from "react-icons/io";
 import { getNameByType } from "../helpers/typeHelper";
 import { useNavigate } from "react-router-dom";
 import { ModernButton } from "./ModernButton";
+import { extractPathFromUrl, isSwapiUrl, formatKey } from "../helpers/renderHelper";
 
 interface DetailCardProps {
   result: SearchResult | null
 }
-
-const extractPathFromUrl = (url: string): string => {
-    const parts = new URL(url).pathname.split("/").filter(Boolean);
-    if (parts.length >= 2) {
-      return `/${parts[parts.length - 2]}/${parts[parts.length - 1]}`;
-    }
-    else {
-      return url
-    }
-};
-
-const isSwapiUrl = (value: string): boolean => {
-  return value.startsWith("https://swapi.dev/api/");
-};
 
 const RenderDetails: React.FC<{ result: Record<string, any> }> = ({ result }) => {
   const [expandedFields, setExpandedFields] = useState<Record<string, boolean>>({});
@@ -96,10 +83,6 @@ const RenderDetails: React.FC<{ result: Record<string, any> }> = ({ result }) =>
     </div>
   );
 };
-
-const formatKey = (key: string) =>
-  key.replace(/([A-Z])/g, " $1").replace(/^./, str => str.toUpperCase());
-
 
 export const DetailCard: React.FC<DetailCardProps> = ({ result }) => {
   if (!result) return null
