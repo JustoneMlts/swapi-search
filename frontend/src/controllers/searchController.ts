@@ -1,9 +1,8 @@
 import axios from 'axios';
 
-require('dotenv').config();
+const API_URL = process.env.REACT_APP_BASE_URL;
 
 export const searchApi = async (query: string, type?: string) => {
-  const API_URL = process.env.REACT_APP_BASE_URL;
 
   try {
     const response = await axios.get(`${API_URL}/search`, {
