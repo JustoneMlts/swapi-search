@@ -12,8 +12,7 @@ import { ModernButton } from "../components/ModernButton"
 import { useNavigate } from "react-router-dom"
 import { authController } from "../controllers/authController"
 import { useDispatch, useSelector } from "react-redux";
-import { setSearchResults, clearSearchResults, selectSearchResults } from "../redux/slices/searchSlice"; 
-import { RootState } from "../redux/store"
+import { setSearchResults, clearSearchResults, selectSearchResults, selectSearchResult, setSearchResult } from "../redux/slices/searchSlice"; 
 
 export const Home = ({
   handleLogout
@@ -21,7 +20,7 @@ export const Home = ({
   handleLogout: () => void;
 }) => {
   const searchResults = useSelector(selectSearchResults);
-  const [selectedResult, setSelectedResult] = useState<SearchResult | null>(null)
+  const selectedResult = useSelector(selectSearchResult);
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [viewMode, setViewMode] = useState<"list" | "table">("list")
@@ -39,7 +38,7 @@ export const Home = ({
         .filter(Array.isArray)
         .flat();
       dispatch(setSearchResults(extractedResults));
-      setSelectedResult(null);
+      dispatch(setSearchResult(undefined));
 
       return extractedResults.map((item) => {
         return getNameByType(item)
@@ -52,6 +51,10 @@ export const Home = ({
       setIsLoading(false);
     }
   };
+
+  const handleSetSelectedResult = (result: SearchResult) => {
+    dispatch(setSearchResult(result));
+  }
 
   return (
     <div className={styles.app}>
@@ -77,9 +80,9 @@ export const Home = ({
           ) : searchResults && searchResults.length ? (
             <>
               {viewMode === "list" ? (
-                <ResultsList results={searchResults} onSelectResult={setSelectedResult} />
+                <ResultsList results={searchResults} onSelectResult={handleSetSelectedResult} />
               ) : (
-                <ResultsTable results={searchResults} onSelectResult={setSelectedResult} />
+                <ResultsTable results={searchResults} onSelectResult={handleSetSelectedResult} />
               )}
               <DetailCard result={selectedResult} />
             </>

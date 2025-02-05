@@ -3,13 +3,13 @@ import { RootState } from "../store";
 import { SearchResult } from "../../types/types";
 
 export interface SearchState {
-  searchResult: SearchResult[]; 
-  searchInput: string;
+  searchResults: SearchResult[]; 
+  searchResult: SearchResult | undefined;
 }
 
 const initialState: SearchState = {
-  searchResult: [], 
-  searchInput: "",
+  searchResults: [], 
+  searchResult: undefined,
 };
 
 const searchSlice = createSlice({
@@ -17,21 +17,21 @@ const searchSlice = createSlice({
   initialState,
   reducers: {
     setSearchResults(state, action: PayloadAction<SearchResult[]>) {
-      state.searchResult = action.payload; 
+      state.searchResults = action.payload; 
     },
     clearSearchResults(state) {
-      state.searchResult = []; 
+      state.searchResults = []; 
     },
     addSearchResult(state, action: PayloadAction<SearchResult>) {
-      state.searchResult.push(action.payload); 
+      state.searchResults.push(action.payload); 
     },
-    setSearchInput(state, action: PayloadAction<string>) {
-      state.searchInput = action.payload; 
+    setSearchResult(state, action: PayloadAction<SearchResult | undefined>) {
+      state.searchResult = action.payload; 
     }
   },
 });
 
-export const { setSearchResults, clearSearchResults, addSearchResult, setSearchInput } = searchSlice.actions;
-export const selectSearchResults = (state: RootState): SearchResult[] | undefined => state.search.searchResult;
-export const selectSearchInput = (state: RootState): string | undefined => state.search.searchInput;
+export const { setSearchResults, clearSearchResults, addSearchResult, setSearchResult } = searchSlice.actions;
+export const selectSearchResults = (state: RootState): SearchResult[] | undefined => state.search.searchResults;
+export const selectSearchResult = (state: RootState): SearchResult | undefined => state.search.searchResult;
 export default searchSlice.reducer;

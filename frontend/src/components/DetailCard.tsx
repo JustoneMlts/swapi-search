@@ -9,7 +9,7 @@ import { ModernButton } from "./ModernButton";
 import { extractPathFromUrl, isSwapiUrl, formatKey, formatDate } from "../helpers/renderHelper";
 
 interface DetailCardProps {
-  result: SearchResult | null
+  result: SearchResult | undefined
 }
 
 const RenderDetails: React.FC<{ result: Record<string, any> }> = ({ result }) => {
