@@ -24,6 +24,7 @@
 }
 
 .content {
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -68,6 +69,7 @@
 @media (min-width: 768px) {
   .content {
     flex-direction: row;
+    overflow-y: hidden;
   }
 
   .title {
