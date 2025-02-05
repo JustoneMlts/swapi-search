@@ -35,7 +35,7 @@ export const formatDate = (dateString: string): string => {
       hour12: true 
   };
 
-  return date.toLocaleString('fr-FR', options); 
+  return date.toLocaleString('en-EN', options); 
 }
 
 

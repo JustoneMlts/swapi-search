@@ -53,10 +53,6 @@ export const Home = ({
     }
   };
 
-  useEffect(() => {
-    console.log("searchResults",searchResults)
-  }, [searchResults])
-
   return (
     <div className={styles.app}>
        <div className={styles.logout}>
@@ -88,7 +84,7 @@ export const Home = ({
               <DetailCard result={selectedResult} />
             </>
           ) : (
-            <p>No searchResults found. Try a different search.</p>
+            <p>No results found. Try a different search.</p>
           )}
         </div>
       </div>

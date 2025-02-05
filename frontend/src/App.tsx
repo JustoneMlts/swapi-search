@@ -3,16 +3,20 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-d
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import DetailPage from "./pages/DetailPage";
+import { clearSearchResults } from "./redux/slices/searchSlice";
+import { useDispatch } from "react-redux";
 
 export const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-
+  const dispatch = useDispatch();
+  
   const handleLogin = () => {
     setIsAuthenticated(true);
   };
 
   const handleLogout = () => {
     setIsAuthenticated(false);
+    dispatch(clearSearchResults());
   }
 
   return (
