@@ -2,20 +2,21 @@ import React, { useState, useEffect, useRef } from "react";
 import type { SearchCategory, SearchResult } from "../types/types";
 import styles from "./SearchBar.module.css";
 import { Search, ChevronDown } from "lucide-react";
+import { setSearchResults} from "../redux/slices/searchSlice"; 
+
 
 interface SearchBarProps {
   onSearch: (query: string, category: SearchCategory) => Promise<string[]>;
-  setResults: React.Dispatch<React.SetStateAction<SearchResult[]>>
 }
 
-export const SearchBar: React.FC<SearchBarProps> = ({ onSearch, setResults }) => {
+export const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState<SearchCategory>("all");
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (!query.trim()) {
-      setResults([])
+      setSearchResults([])
       return;
     }
   
