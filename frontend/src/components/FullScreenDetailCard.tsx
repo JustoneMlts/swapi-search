@@ -6,7 +6,7 @@ import { User, Globe, ArrowLeft } from "lucide-react"
 import { getNameByType } from "../helpers/typeHelper"
 import { ModernButton } from "./ModernButton"
 import { useNavigate } from "react-router-dom"
-import { isSwapiUrl, extractPathFromUrl, formatKey } from "../helpers/renderHelper"
+import { isSwapiUrl, extractPathFromUrl, formatKey, formatDate } from "../helpers/renderHelper"
 
 interface FullScreenDetailPageProps {
     result: SearchResult | null
@@ -71,7 +71,7 @@ const RenderDetails: React.FC<{ result: Record<string, any> }> = ({ result }) =>
                                         {extractPathFromUrl(value)}
                                     </ModernButton>
                                 ) : (
-                                    value
+                    (key.toLowerCase().includes("created") || key.toLowerCase().includes("edited")) ? formatDate(value) : value
                                 )}
                             </p>
                         )}
@@ -100,7 +100,7 @@ export const FullScreenDetailCard: React.FC<FullScreenDetailPageProps> = ({ resu
                 </h1>
             </div>
             <div className={styles.content}>
-                <RenderDetails result={result} /> {/* Pass result prop to RenderDetails */}
+                <RenderDetails result={result} /> 
             </div>
         </div>
     )

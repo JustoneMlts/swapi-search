@@ -6,7 +6,7 @@ import { IoMdPlanet } from "react-icons/io";
 import { getNameByType } from "../helpers/typeHelper";
 import { useNavigate } from "react-router-dom";
 import { ModernButton } from "./ModernButton";
-import { extractPathFromUrl, isSwapiUrl, formatKey } from "../helpers/renderHelper";
+import { extractPathFromUrl, isSwapiUrl, formatKey, formatDate } from "../helpers/renderHelper";
 
 interface DetailCardProps {
   result: SearchResult | null
@@ -73,7 +73,7 @@ const RenderDetails: React.FC<{ result: Record<string, any> }> = ({ result }) =>
                       {extractPathFromUrl(value)}
                     </ModernButton>
                   ) : (
-                    value
+                    (key.toLowerCase().includes("created") || key.toLowerCase().includes("edited")) ? formatDate(value) : value
                   )}
                 </p>
               )}

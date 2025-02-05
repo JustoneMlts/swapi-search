@@ -15,8 +15,29 @@ export const isSwapiUrl = (value: string): boolean => {
   return value.startsWith("https://swapi.dev/api/");
 };
 
-export const formatKey = (key: string) =>
-  key.replace(/([A-Z])/g, " $1").replace(/^./, str => str.toUpperCase());
+export const formatKey = (key: string): string => {
+  return key
+      .replace(/_/g, " ")  
+      .replace(/\b\w/g, (char) => char.toUpperCase()); 
+}
+
+export const formatDate = (dateString: string): string => {
+  const date = new Date(dateString); 
+
+  const options: Intl.DateTimeFormatOptions = {
+      weekday: 'long', 
+      year: 'numeric', 
+      month: 'long',   
+      day: 'numeric',  
+      hour: '2-digit', 
+      minute: '2-digit', 
+      second: '2-digit', 
+      hour12: true 
+  };
+
+  return date.toLocaleString('fr-FR', options); 
+}
+
 
 export const RenderDetails: React.FC<{ result: Record<string, any> }> = ({ result }) => {
   const [expandedFields, setExpandedFields] = useState<Record<string, boolean>>({});
