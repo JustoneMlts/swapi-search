@@ -3,6 +3,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import { FullScreenDetailCard } from "../components/FullScreenDetailCard";
 import type { SearchResult } from "../types/types";
 import axios from "axios";
+import { Spinner } from "../components/Spinner";
+import styles from "./DetailPage.module.css"
 
 const DetailPage = () => {
   const { category, id } = useParams();
@@ -28,7 +30,11 @@ const DetailPage = () => {
     fetchData();
   }, [category, id]);
 
-  if (loading) return <p>Chargement...</p>;
+  if (loading) return (
+    <div className={styles.detailContent}>
+      <Spinner></Spinner>
+    </div>
+  );
   if (error) return <p>Erreur : {error}</p>;
   if (!result) return <p>Aucun résultat trouvé.</p>;
 
