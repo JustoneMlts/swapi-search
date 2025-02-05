@@ -3,10 +3,11 @@ import type { SearchResult } from "../types/types"
 import styles from "./DetailCard.module.css"
 import { FaUser } from "react-icons/fa";
 import { IoMdPlanet } from "react-icons/io";
-import { getNameByType } from "../helpers/typeHelper";
+import { getNameByType, getType } from "../helpers/typeHelper";
 import { useNavigate } from "react-router-dom";
 import { ModernButton } from "./ModernButton";
 import { extractPathFromUrl, isSwapiUrl, formatKey, formatDate } from "../helpers/renderHelper";
+import { renderIcon } from "../helpers/iconHelper";
 
 interface DetailCardProps {
   result: SearchResult | undefined
@@ -85,17 +86,24 @@ const RenderDetails: React.FC<{ result: Record<string, any> }> = ({ result }) =>
 };
 
 export const DetailCard: React.FC<DetailCardProps> = ({ result }) => {
-  if (!result) return null
-
-  const isCharacter = "birth_year" in result
 
   return (
     <div className={styles.detailCard}>
-      <h2>
-        {isCharacter ? <FaUser className={styles.icon} /> : <IoMdPlanet className={styles.icon} />}
-        {getNameByType(result)}
-      </h2>
-      <RenderDetails result={result} />
+      {result ?
+        <>
+          <h2>
+            {renderIcon(getType(result))}
+            {getNameByType(result)}
+          </h2>
+          <RenderDetails result={result} />
+        </>
+        :
+        <div className={styles.infoText}>
+          <h3>
+            Click on an element of the list to get more details.
+          </h3>
+        </div>
+      }
     </div>
   )
 }

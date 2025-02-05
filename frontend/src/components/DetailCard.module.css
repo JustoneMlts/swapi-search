@@ -1,6 +1,6 @@
 .detailCard {
     padding: 20px;
-    background-color: var(--color-primary);
+    background-color: var(--color-background);
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     max-height: 30rem;
@@ -33,6 +33,14 @@
   .icon {
     margin-right: 12px;
     color: var(--color-text);
+  }
+
+  .infoText {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    height: 100%;
   }
   
   @media (min-width: 768px) {
