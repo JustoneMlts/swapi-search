@@ -87,7 +87,7 @@ export const Home = ({
               <DetailCard result={selectedResult} />
             </>
           ) : (
-            <p>No results found. Try a different search.</p>
+            <p>Type in the bar to search.</p>
           )}
         </div>
       </div>
