@@ -8,7 +8,6 @@ export const authController = {
   login: async (username: string, password: string): Promise<{ message: string; token: string }> => {
     try {
       const response = await axios.post(`${API_URL}/login`, { username, password });
-      console.log(response)
       if (response.data.token) {
         localStorage.setItem("token", response.data.token);
       }

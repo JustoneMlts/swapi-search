@@ -18,7 +18,6 @@ const DetailPage = () => {
 
       try {
         const response = await axios.get(`https://swapi.dev/api/${category}/${id}/`);
-        console.log("response data", response.data)
         setResult(response.data);
       } catch (err) {
         setError("Impossible de charger les détails.");

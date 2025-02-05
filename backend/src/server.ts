@@ -2,11 +2,9 @@ import Hapi from '@hapi/hapi';
 import { searchDataController } from './controllers/searchController';
 import { authController } from './controllers/authController'
 
-console.log("ici")
-
 const server = Hapi.server({
-  port: 5000,
-  host: 'localhost',
+  port: process.env.PORT || 5000, 
+  host: "0.0.0.0",
   routes: {
     cors: {
       origin: ["*"], 
