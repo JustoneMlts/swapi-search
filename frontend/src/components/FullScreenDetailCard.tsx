@@ -95,7 +95,6 @@ const RenderDetails: React.FC<{ result: Record<string, any> }> = ({ result }) =>
 const formatKey = (key: string) => key.replace(/([A-Z])/g, " $1").replace(/^./, (str) => str.toUpperCase())
 
 export const FullScreenDetailCard: React.FC<FullScreenDetailPageProps> = ({ result, onClose }) => {
-    const [expandedFields, setExpandedFields] = useState<Record<string, boolean>>({}) // Moved useState here
 
     if (!result) return null
 

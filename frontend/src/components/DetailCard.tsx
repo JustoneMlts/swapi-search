@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import type { ICharacter, SearchResult } from "../types/types"
+import type { SearchResult } from "../types/types"
 import styles from "./DetailCard.module.css"
-import { User, Globe, Ruler, Weight, Cake, Users } from "lucide-react"
+import { FaUser } from "react-icons/fa";
+import { IoMdPlanet } from "react-icons/io";
 import { getNameByType } from "../helpers/typeHelper";
 import { useNavigate } from "react-router-dom";
 import { ModernButton } from "./ModernButton";
@@ -108,7 +109,7 @@ export const DetailCard: React.FC<DetailCardProps> = ({ result }) => {
   return (
     <div className={styles.detailCard}>
       <h2>
-        {isCharacter ? <User className={styles.icon} /> : <Globe className={styles.icon} />}
+        {isCharacter ? <FaUser className={styles.icon} /> : <IoMdPlanet className={styles.icon} />}
         {getNameByType(result)}
       </h2>
       <RenderDetails result={result} />

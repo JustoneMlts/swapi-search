@@ -33,7 +33,7 @@ export const Login = ({
     <div className={styles.loginPage}>
       <div className={styles.loginContainer}>
         <div className={styles.imageContainer}>
-          <img src={Rebel} className={styles.image} />
+          <img src={Rebel} className={styles.image} alt="rebelAllianceLogo" />
         </div>
         <div className={styles.formContainer}>
           <h2 className={styles.title}>Login</h2>

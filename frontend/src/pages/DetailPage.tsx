@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { FullScreenDetailCard } from "../components/FullScreenDetailCard";
 import type { SearchResult } from "../types/types";
-import { searchApi } from "../controllers/searchController"; // API pour récupérer la fiche
 import axios from "axios";
 
 const DetailPage = () => {

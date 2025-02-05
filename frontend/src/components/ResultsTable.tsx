@@ -1,6 +1,5 @@
 import type React from "react";
 import type { SearchResult, ICharacter, IPlanet } from "../types/types";
-import { User, Globe } from "lucide-react";
 import styles from "./ResultsTable.module.css";
 import { renderIcon } from "../helpers/iconHelper";
 import { getNameByType } from "../helpers/typeHelper";

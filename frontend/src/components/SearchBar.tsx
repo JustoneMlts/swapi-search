@@ -21,7 +21,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSearch, setResults }) =>
   
     const timer = setTimeout(async () => {
       try {
-        const results = await onSearch(query, category);
+        await onSearch(query, category);
       } catch (error) {
         console.error("Error fetching suggestions:", error);
       }
