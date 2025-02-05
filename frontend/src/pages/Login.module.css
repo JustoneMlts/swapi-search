@@ -89,7 +89,7 @@
     align-items: center;
     font-size: 12px;
     margin-bottom: 20px;
-    color: red;
+    color: rgb(239, 85, 85);
     text-decoration: none;
     width: 100%;
   }
@@ -135,8 +135,15 @@
     }
   
     .formContainer {
+      padding:80px;
+    }
+
+    .titleAndFormContainer {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       width: 50%;
-      padding: 60px;
     }
   }
   

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import type { SearchCategory, SearchResult } from "../types/types";
 import styles from "./SearchBar.module.css";
 import { Search, ChevronDown } from "lucide-react";
-import { setSearchResults} from "../redux/slices/searchSlice"; 
+import { setSearchResults } from "../redux/slices/searchSlice";
 
 
 interface SearchBarProps {
@@ -19,18 +19,18 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
       setSearchResults([])
       return;
     }
-  
+
     const timer = setTimeout(async () => {
       try {
         await onSearch(query, category);
       } catch (error) {
         console.error("Error fetching suggestions:", error);
       }
-    }, 500); 
-  
-    return () => clearTimeout(timer); 
+    }, 500);
+
+    return () => clearTimeout(timer);
   }, [query, category])
- 
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onSearch(query, category);
@@ -47,7 +47,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
           placeholder="Search the galaxy..."
           className={styles.searchInput}
         />
-               <div className={styles.searchControls}>
+        <div className={styles.searchControls}>
           <div className={styles.categorySelect}>
             <select
               value={category}

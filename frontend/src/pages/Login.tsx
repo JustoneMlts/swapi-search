@@ -16,7 +16,7 @@ export const Login = ({
   const [password, setPassword] = useState("")
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
- 
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true);
@@ -35,51 +35,54 @@ export const Login = ({
         <div className={styles.imageContainer}>
           <img src={Rebel} className={styles.image} alt="rebelAllianceLogo" />
         </div>
-        <div className={styles.formContainer}>
+        <div className={styles.titleAndFormContainer}>
           <h2 className={styles.title}>Login</h2>
-          <form onSubmit={handleSubmit} className={styles.form}>
-            <div className={styles.inputGroup}>
-              <input
-                type="text"
-                id="username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                required
-                placeholder="Username"
-              />
-            </div>
-            <div className={styles.inputGroup}>
-              <div className={styles.passwordInput}>
-                <input
-                  type={showPassword ? "text" : "password"}
-                  id="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                  placeholder="Password"
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className={styles.showPasswordButton}
-                >
-                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-                </button>
-              </div>
-            </div>
-            <div>
-              {error &&
-                <span className={styles.error}>
-                  {error}
-                </span>}
-            </div>
 
-            <button type="submit" className={styles.loginButton}>
-              {
-                isLoading ? <Spinner /> : "Login"
-              }
-            </button>
-          </form>
+          <div className={styles.formContainer}>
+            <form onSubmit={handleSubmit} className={styles.form}>
+              <div className={styles.inputGroup}>
+                <input
+                  type="text"
+                  id="username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  required
+                  placeholder="Username"
+                />
+              </div>
+              <div className={styles.inputGroup}>
+                <div className={styles.passwordInput}>
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    id="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                    placeholder="Password"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className={styles.showPasswordButton}
+                  >
+                    {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                  </button>
+                </div>
+              </div>
+              <div>
+                {error &&
+                  <span className={styles.error}>
+                    {error}
+                  </span>}
+              </div>
+
+              <button type="submit" className={styles.loginButton}>
+                {
+                  isLoading ? <Spinner /> : "Login"
+                }
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
