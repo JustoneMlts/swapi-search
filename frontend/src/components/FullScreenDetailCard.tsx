@@ -6,27 +6,12 @@ import { User, Globe, ArrowLeft } from "lucide-react"
 import { getNameByType } from "../helpers/typeHelper"
 import { ModernButton } from "./ModernButton"
 import { useNavigate } from "react-router-dom"
+import { isSwapiUrl, extractPathFromUrl, formatKey, formatDate } from "../helpers/renderHelper"
 
 interface FullScreenDetailPageProps {
     result: SearchResult | null
     onClose: () => void
 }
-
-const extractPathFromUrl = (url: string): string | null => {
-    try {
-        const parts = new URL(url).pathname.split("/").filter(Boolean);
-        if (parts.length >= 2) {
-            return `/${parts[parts.length - 2]}/${parts[parts.length - 1]}`;
-        }
-    } catch (e) {
-        return null;
-    }
-    return null;
-};
-
-const isSwapiUrl = (value: string): boolean => {
-    return value.startsWith("https://swapi.dev/api/");
-};
 
 const RenderDetails: React.FC<{ result: Record<string, any> }> = ({ result }) => {
     const [expandedFields, setExpandedFields] = useState<Record<string, boolean>>({})
@@ -78,11 +63,15 @@ const RenderDetails: React.FC<{ result: Record<string, any> }> = ({ result }) =>
                             <p>
                                 <strong>{formatKey(key)}:</strong> &nbsp;
                                 {typeof value === "string" && isSwapiUrl(value) ? (
-                                    <ModernButton onClick={() => navigate(value)}>
-                                        {value}
+                                    <ModernButton onClick={() => {
+                                        if (extractPathFromUrl(value) !== null) {
+                                            navigate(extractPathFromUrl(value))
+                                        }
+                                    }}>
+                                        {extractPathFromUrl(value)}
                                     </ModernButton>
                                 ) : (
-                                    value
+                    (key.toLowerCase().includes("created") || key.toLowerCase().includes("edited")) ? formatDate(value) : value
                                 )}
                             </p>
                         )}
@@ -91,8 +80,6 @@ const RenderDetails: React.FC<{ result: Record<string, any> }> = ({ result }) =>
         </div>
     )
 }
-
-const formatKey = (key: string) => key.replace(/([A-Z])/g, " $1").replace(/^./, (str) => str.toUpperCase())
 
 export const FullScreenDetailCard: React.FC<FullScreenDetailPageProps> = ({ result, onClose }) => {
 
@@ -113,7 +100,7 @@ export const FullScreenDetailCard: React.FC<FullScreenDetailPageProps> = ({ resu
                 </h1>
             </div>
             <div className={styles.content}>
-                <RenderDetails result={result} /> {/* Pass result prop to RenderDetails */}
+                <RenderDetails result={result} /> 
             </div>
         </div>
     )
