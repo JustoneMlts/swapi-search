@@ -68,7 +68,7 @@ export const Home = ({
             Logout
           </ModernButton>
         </div>
-      <h1 className={styles.title}>Star Wars Explorer</h1>
+      <h1 className={styles.title}>Rebel Alliance Explorer</h1>
       <div className={styles.container}>
         <div className={styles.searchBarContainer}>
           <SearchBar onSearch={handleSearch}  />
